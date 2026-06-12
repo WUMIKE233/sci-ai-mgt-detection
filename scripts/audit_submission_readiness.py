@@ -97,6 +97,34 @@ def stale_scope_hits(texts: dict[str, str]) -> list[str]:
     return hits
 
 
+def citation_reference_mismatches(manuscript_text: str) -> tuple[list[str], list[str]]:
+    if "## References" not in manuscript_text:
+        return ["reference section missing"], ["reference section missing"]
+    body, refs = manuscript_text.split("## References", 1)
+    cited_pairs: set[tuple[str, str]] = set()
+    for group in re.findall(r"\(([^()]*?\b(?:19|20)\d{2}[a-z]?[^()]*)\)", body):
+        for part in re.split(r";", group):
+            year = re.search(r"((?:19|20)\d{2}[a-z]?)", part)
+            author = re.match(r"\s*([A-Z][A-Za-z-]+)", part)
+            if year and author:
+                cited_pairs.add((author.group(1), year.group(1)))
+    for author, year in re.findall(
+        r"([A-Z][A-Za-z-]+)(?:\s+et al\.|\s*&\s*[A-Z][A-Za-z-]+)?\s*\(((?:19|20)\d{2}[a-z]?)\)",
+        body,
+    ):
+        cited_pairs.add((author, year))
+
+    reference_pairs: set[tuple[str, str]] = set()
+    for line in refs.splitlines():
+        match = re.match(r"\s*([A-Z][A-Za-z-]+),.*?\(((?:19|20)\d{2}[a-z]?)\)", line)
+        if match:
+            reference_pairs.add((match.group(1), match.group(2)))
+
+    references_not_cited = sorted(f"{author} {year}" for author, year in reference_pairs - cited_pairs)
+    citations_missing_reference = sorted(f"{author} {year}" for author, year in cited_pairs - reference_pairs)
+    return references_not_cited, citations_missing_reference
+
+
 def scan_placeholders(paths: list[Path]) -> tuple[list[dict], Counter]:
     rows = []
     counts = Counter()
@@ -208,6 +236,7 @@ def build_checks(placeholder_rows: list[dict], placeholder_counts: Counter) -> l
         )
     )
     numeric_reference_hits = re.findall(r"(?m)^\s*\[\d+\]|\[[0-9]+(?:,\s*[0-9]+)*\]", manuscript_text)
+    references_not_cited, citations_missing_reference = citation_reference_mismatches(manuscript_text)
     checks.append(
         check(
             "APA-style references and citations used",
@@ -215,6 +244,15 @@ def build_checks(placeholder_rows: list[dict], placeholder_counts: Counter) -> l
             status_from_bool(len(numeric_reference_hits) == 0),
             f"numeric_reference_or_citation_hits={len(numeric_reference_hits)}",
             "Use author-year in-text citations and an alphabetized APA-style reference list.",
+        )
+    )
+    checks.append(
+        check(
+            "Reference list matches body citations",
+            "literature",
+            status_from_bool(not references_not_cited and not citations_missing_reference),
+            f"references_not_cited={references_not_cited}; citations_missing_reference={citations_missing_reference}",
+            "Every body citation must have a reference entry, and every reference entry should be cited in the manuscript.",
         )
     )
     checks.append(
