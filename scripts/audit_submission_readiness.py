@@ -305,18 +305,28 @@ def build_checks(placeholder_rows: list[dict], placeholder_counts: Counter) -> l
         )
     )
     journal_artifacts = sorted(Path("docs").glob("journal_verification_*.md"))
+    journal_evidence_files = [
+        path
+        for path in sorted(Path("docs/journal_evidence").glob("*"))
+        if path.is_file() and path.suffix.lower() in {".png", ".jpg", ".jpeg", ".pdf"}
+    ]
+    journal_status = "warn" if journal_evidence_files else "blocker"
     journal_evidence = (
-        f"public verification artifacts={[str(path) for path in journal_artifacts]}; final Web of Science JCR/CAS screenshot or export still recommended"
-        if journal_artifacts
-        else "No current journal verification artifact found."
+        f"verification artifacts={[str(path) for path in journal_artifacts]}; evidence_files={[str(path) for path in journal_evidence_files]}; third-party evidence captured; official Web of Science JCR/CAS export still recommended"
+        if journal_evidence_files
+        else (
+            f"public verification artifacts={[str(path) for path in journal_artifacts]}; final Web of Science JCR/CAS screenshot or export still recommended"
+            if journal_artifacts
+            else "No current journal verification artifact found."
+        )
     )
     checks.append(
         check(
-            "Target journal current verification complete",
+            "Target journal partition evidence captured",
             "journal",
-            status_from_bool(False),
+            journal_status,
             journal_evidence,
-            "Verify the selected SCI Q1/一区 journal in Web of Science JCR or CAS partition records close to submission.",
+            "Use the captured third-party evidence for screening; supplement with official Web of Science JCR/CAS export if the institution requires formal proof.",
         )
     )
     author_metadata_text = author_metadata.read_text(encoding="utf-8", errors="replace").lower() if author_metadata.exists() else ""

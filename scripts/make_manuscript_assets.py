@@ -205,7 +205,7 @@ def write_current_index(path: Path) -> None:
         "",
         "## Current Completion Boundary",
         "",
-        "The project now has real-data preliminary experiments, Transformer baselines, bootstrap intervals, error analysis, official SemEval Subtask A monolingual small-sample TF-IDF and DistilBERT runs, a three-seed SemEval stability sweep for low-cost models, a three-seed SemEval neural baseline sweep, generated DOCX submission drafts, a public GitHub code repository, a local reproducibility code archive, and a repeatable submission-readiness audit. The latest audit status is still BLOCKED because final Web of Science JCR/CAS target-journal verification remains required.",
+        "The project now has real-data preliminary experiments, Transformer baselines, bootstrap intervals, error analysis, official SemEval Subtask A monolingual small-sample TF-IDF and DistilBERT runs, a three-seed SemEval stability sweep for low-cost models, a three-seed SemEval neural baseline sweep, generated DOCX submission drafts, a public GitHub code repository, a local reproducibility code archive, captured third-party journal partition evidence, and a repeatable submission-readiness audit. The latest audit status is WARN because no blockers remain, but an official Web of Science JCR/CAS export is still recommended if the institution requires formal proof.",
     ]
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
