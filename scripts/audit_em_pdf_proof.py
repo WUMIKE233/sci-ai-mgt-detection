@@ -24,6 +24,7 @@ EXPECTED_SNIPPETS = [
     "MAGE paraphrase OOD",
     "Accuracy is 0.6518 on SemEval monolingual dev",
     "Dataset access instructions, preprocessing scripts, configuration files, and the locked aggregate-result summary",
+    "eswa-submission-v1",
 ]
 STALE_MARKERS = [
     "Adversarial Distribution Shifts",
