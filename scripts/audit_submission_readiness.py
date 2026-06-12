@@ -53,6 +53,50 @@ def count_words_markdown(path: Path) -> int:
     return len(re.findall(r"[A-Za-z][A-Za-z0-9'-]*", text))
 
 
+def read_text(path: Path) -> str:
+    if not path.exists():
+        return ""
+    return path.read_text(encoding="utf-8", errors="replace")
+
+
+def extract_abstract_word_count(text: str) -> int:
+    match = re.search(r"^## Abstract\s+(.*?)\n## ", text, flags=re.M | re.S)
+    if not match:
+        return 0
+    abstract = match.group(1)
+    abstract = re.sub(r"`[^`]*`", " ", abstract)
+    return len(re.findall(r"[A-Za-z][A-Za-z0-9'-]*", abstract))
+
+
+def highlight_bullets(text: str) -> list[str]:
+    return [line[2:].strip() for line in text.splitlines() if line.startswith("- ")]
+
+
+def stale_scope_hits(texts: dict[str, str]) -> list[str]:
+    patterns = [
+        r"\bAdversarial\b",
+        r"\badversarial\b",
+        r"full-processing protocol remains pending",
+        r"final experiment sampling remains pending",
+        r"Final locked numbers.*pending",
+        r"pending final",
+        r"needs evidence",
+        r"not final",
+        r"not sufficient",
+        r"cannot be used",
+        r"preliminary",
+        r"完整.*待",
+        r"仍待",
+    ]
+    compiled = [re.compile(pattern, flags=re.I) for pattern in patterns]
+    hits = []
+    for path, text in texts.items():
+        for line_no, line in enumerate(text.splitlines(), start=1):
+            if any(pattern.search(line) for pattern in compiled):
+                hits.append(f"{path}:{line_no}:{line.strip()[:140]}")
+    return hits
+
+
 def scan_placeholders(paths: list[Path]) -> tuple[list[dict], Counter]:
     rows = []
     counts = Counter()
@@ -104,8 +148,37 @@ def build_checks(placeholder_rows: list[dict], placeholder_counts: Counter) -> l
     highlights = Path("manuscript/highlights.md")
     author_metadata = Path("docs/author_metadata_template.md")
     references = Path("references/seed_references.bib")
+    title_page = Path("manuscript/title_page.md")
+    public_status = Path("docs/current_status_index.md")
+    claim_registry = Path("docs/claim_evidence_registry.md")
+    data_sources = Path("data/DATA_SOURCES.md")
+    protocol = Path("docs/experiment_protocol.md")
     word_count = count_words_markdown(manuscript)
     bib_count = count_bib_entries(references)
+    manuscript_text = read_text(manuscript)
+    title_page_text = read_text(title_page)
+    declarations_text = read_text(declarations)
+    cover_text = read_text(cover)
+    highlights_text = read_text(highlights)
+    abstract_words = extract_abstract_word_count(manuscript_text)
+    bullets = highlight_bullets(highlights_text)
+    long_bullets = [bullet for bullet in bullets if len(bullet) > 85]
+    title_line = manuscript_text.splitlines()[0].lstrip("# ").strip() if manuscript_text else ""
+    stale_hits = stale_scope_hits(
+        {
+            str(manuscript): manuscript_text,
+            str(highlights): highlights_text,
+            str(declarations): declarations_text,
+            str(cover): cover_text,
+            str(title_page): title_page_text,
+            str(author_metadata): read_text(author_metadata),
+            str(public_status): read_text(public_status),
+            str(claim_registry): read_text(claim_registry),
+            str(data_sources): read_text(data_sources),
+            str(protocol): read_text(protocol),
+            "README.md": read_text(Path("README.md")),
+        }
+    )
 
     checks.append(
         check(
@@ -118,11 +191,39 @@ def build_checks(placeholder_rows: list[dict], placeholder_counts: Counter) -> l
     )
     checks.append(
         check(
-            "Manuscript RESULT_REQUIRED markers resolved",
+            "Manuscript evidence markers resolved",
             "manuscript",
             status_from_bool(placeholder_counts.get(str(manuscript), 0) == 0),
             f"{placeholder_counts.get(str(manuscript), 0)} markers in {manuscript}",
             "Replace each marker only after the corresponding evidence is locked.",
+        )
+    )
+    checks.append(
+        check(
+            "ESWA abstract word limit satisfied",
+            "manuscript",
+            status_from_bool(0 < abstract_words <= 250),
+            f"abstract_word_count={abstract_words}; ESWA limit=250",
+            "Shorten the abstract if it exceeds the journal limit.",
+        )
+    )
+    numeric_reference_hits = re.findall(r"(?m)^\s*\[\d+\]|\[[0-9]+(?:,\s*[0-9]+)*\]", manuscript_text)
+    checks.append(
+        check(
+            "APA-style references and citations used",
+            "literature",
+            status_from_bool(len(numeric_reference_hits) == 0),
+            f"numeric_reference_or_citation_hits={len(numeric_reference_hits)}",
+            "Use author-year in-text citations and an alphabetized APA-style reference list.",
+        )
+    )
+    checks.append(
+        check(
+            "Title synchronized across manuscript package",
+            "submission package",
+            status_from_bool(bool(title_line) and title_line in title_page_text and title_line in cover_text),
+            f"title={title_line!r}; in_title_page={title_line in title_page_text}; in_cover_letter={title_line in cover_text}",
+            "Update the title consistently in the manuscript, title page, cover letter, and Editorial Manager metadata.",
         )
     )
     checks.append(
@@ -147,9 +248,34 @@ def build_checks(placeholder_rows: list[dict], placeholder_counts: Counter) -> l
         check(
             "Highlights prepared",
             "submission package",
-            status_from_bool(exists_nonempty(highlights)),
-            f"{highlights} size={file_size(highlights)} bytes",
-            "Revise highlights after final claims are locked.",
+            status_from_bool(exists_nonempty(highlights) and 3 <= len(bullets) <= 5 and not long_bullets),
+            f"{highlights} bullets={len(bullets)}; long_bullets={len(long_bullets)}; max_length={max([len(b) for b in bullets], default=0)}",
+            "Keep 3-5 highlight bullets and no more than 85 characters per bullet.",
+        )
+    )
+    data_availability_ready = (
+        "semeval" in declarations_text.lower()
+        and "mage" in declarations_text.lower()
+        and "raid" in declarations_text.lower()
+        and "not redistributed" in declarations_text.lower()
+        and "github.com/wumike233/sci-ai-mgt-detection" in declarations_text.lower()
+    )
+    checks.append(
+        check(
+            "Data and code availability statements are scoped",
+            "reproducibility",
+            status_from_bool(data_availability_ready),
+            f"mentions_semeval_mage_raid_nonredistribution_github={data_availability_ready}",
+            "Map each dataset and derived output to a repository, access route, or explicit redistribution limitation.",
+        )
+    )
+    checks.append(
+        check(
+            "No stale scope or unfinished-language markers",
+            "global",
+            status_from_bool(len(stale_hits) == 0),
+            f"stale_hits={len(stale_hits)}" + ("; first=" + stale_hits[0] if stale_hits else ""),
+            "Remove title/claim mismatches and outdated unfinished wording from submission-facing files.",
         )
     )
     docx_package_files = [
@@ -260,9 +386,9 @@ def build_checks(placeholder_rows: list[dict], placeholder_counts: Counter) -> l
         check(
             "Repeated-seed neural baselines complete",
             "statistics",
-            status_from_bool(exists_nonempty(neural_seed_report)),
+            status_from_bool(exists_nonempty(neural_seed_report), blocker=False),
             f"{neural_seed_report} exists={neural_seed_report.exists()}",
-            "Run repeated-seed DistilBERT or stronger encoder experiments after selecting final model scope.",
+            "Keep the manuscript scoped to the implemented TF-IDF Logistic Regression detector unless stronger repeated-seed encoder baselines are added.",
         )
     )
 

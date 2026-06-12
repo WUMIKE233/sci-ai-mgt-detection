@@ -4,7 +4,7 @@
 
 本项目用于准备一篇具备 SCI 一区投稿潜力的人工智能方向论文。当前选题暂定为：
 
-**面向跨领域与对抗扰动场景的校准式 AI 生成文本检测方法**
+**面向跨领域与改写式分布偏移场景的校准式 AI 生成文本检测方法**
 
 论文目标不是凭空生成“完整结果”，而是建立一套可执行、可复现、可投稿前逐步填证据的研究闭环。当前版本已经从小样本预实验推进到锁定版真实数据实验：SemEval-2024 Task 8 Subtask A 使用官方 monolingual/multilingual 全量 train-dev，MAGE 使用本地 full train/test/OOD 文件。
 
@@ -43,7 +43,7 @@
 
 This workspace prepares an AI-related manuscript with potential for submission to an SCI Q1 journal. The provisional topic is:
 
-**Calibrated detection of AI-generated text under cross-domain and adversarial distribution shifts**
+**Calibrated detection of AI-generated text under cross-domain and paraphrase-style distribution shifts**
 
 The project is evidence-gated: missing experiments are explicitly tracked as evidence gaps rather than written as completed findings. The current version has moved from small-sample smoke tests to locked empirical experiments: SemEval-2024 Task 8 Subtask A uses the official full monolingual/multilingual train-dev files, and MAGE uses the locally available full train/test/OOD files.
 

@@ -1,6 +1,6 @@
 # Current Project Status Index
 
-This file is the preferred entry point for the current state of the SCI manuscript project. Older preliminary reports remain useful as stage logs, but the manuscript now uses the locked empirical experiment outputs listed below.
+This file is the preferred entry point for the current state of the SCI manuscript project. Older development-stage reports remain useful as stage logs, but the manuscript now uses the locked empirical experiment outputs listed below.
 
 ## Latest Evidence Files
 

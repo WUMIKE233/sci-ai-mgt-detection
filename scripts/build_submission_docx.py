@@ -113,8 +113,8 @@ def configure_document(doc: Document) -> None:
 
 
 def add_formatted_text(paragraph, text: str) -> None:
-    """Add text with simple bold and inline-code handling."""
-    parts = re.split(r"(`[^`]+`|\*\*[^*]+\*\*)", text)
+    """Add text with simple Markdown emphasis and inline-code handling."""
+    parts = re.split(r"(`[^`]+`|\*\*[^*]+\*\*|(?<!\*)\*[^*\n]+\*(?!\*))", text)
     for part in parts:
         if not part:
             continue
@@ -124,6 +124,10 @@ def add_formatted_text(paragraph, text: str) -> None:
         elif part.startswith("`") and part.endswith("`"):
             run = paragraph.add_run(part[1:-1])
             set_run_font(run, name="Consolas", size=10)
+        elif part.startswith("*") and part.endswith("*"):
+            run = paragraph.add_run(part[1:-1])
+            set_run_font(run)
+            run.italic = True
         else:
             run = paragraph.add_run(part)
             set_run_font(run)
