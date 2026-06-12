@@ -1,5 +1,7 @@
 # Neural Seed Sweep Report
 
+Status: historical development log. The current submission-scope manuscript is bounded to TF-IDF Logistic Regression reliability analysis unless stronger full-scope neural baselines are added later.
+
 This report repeats DistilBERT neural baselines on the SemEval-2024 Task 8 Subtask A monolingual small-sample setup. It provides preliminary repeated-seed stability evidence and is not a final full-benchmark result.
 
 ## Configuration

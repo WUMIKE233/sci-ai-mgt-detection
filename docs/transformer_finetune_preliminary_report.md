@@ -1,5 +1,7 @@
 # Fine-Tuned Transformer Preliminary Report
 
+Status: historical development log. This report records early small-sample neural experiments; the current submitted claims are bounded to the locked TF-IDF Logistic Regression reliability study.
+
 Date: 2026-06-12
 
 ## Purpose

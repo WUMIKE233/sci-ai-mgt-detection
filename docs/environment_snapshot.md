@@ -1,6 +1,6 @@
 # Reproducibility Environment Snapshot
 
-This file records the local environment used for the current preliminary experiments. Final submission should regenerate it after the experiment protocol is locked.
+This file records the local environment used for the locked empirical experiments and submission package generated for the current manuscript scope.
 
 ## Runtime
 
@@ -34,5 +34,5 @@ This file records the local environment used for the current preliminary experim
 
 ## Boundary
 
-- This environment snapshot supports reproducibility for the current preliminary package.
-- It is not a locked artifact for final submission until the final data processing and model scope are frozen.
+- This environment snapshot supports reproducibility for the current locked SemEval-A and MAGE empirical package.
+- It records the environment used for the submitted empirical scope; future expanded RAID, stronger neural, or commercial-detector experiments should generate a new snapshot.

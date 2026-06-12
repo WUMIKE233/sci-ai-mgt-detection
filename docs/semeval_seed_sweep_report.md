@@ -1,5 +1,7 @@
 # SemEval Seed Sweep Report
 
+Status: historical development log. The current manuscript uses locked full SemEval-A and MAGE empirical outputs.
+
 This report repeats the low-cost SemEval-2024 Task 8 Subtask A monolingual small-sample pipeline across sampling seeds. It is preliminary stability evidence, not final benchmark evidence.
 
 Seeds: `13, 42, 2026`

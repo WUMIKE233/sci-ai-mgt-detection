@@ -1,5 +1,7 @@
 # RAID Labeled Subset Preliminary Report
 
+Status: historical development log. RAID is cited only for related-work and data-source context in the current submission-scope manuscript, not for main empirical claims.
+
 Date: 2026-06-12
 
 ## Purpose

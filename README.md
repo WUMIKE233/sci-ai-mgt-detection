@@ -8,6 +8,8 @@
 
 论文目标不是凭空生成“完整结果”，而是建立一套可执行、可复现、可投稿前逐步填证据的研究闭环。当前版本已经从小样本预实验推进到锁定版真实数据实验：SemEval-2024 Task 8 Subtask A 使用官方 monolingual/multilingual 全量 train-dev，MAGE 使用本地 full train/test/OOD 文件。
 
+当前投稿证据入口是 `docs/current_status_index.md` 和 `docs/empirical_experiment_summary.md`。早期验证报告是历史开发日志，仅用于记录管线验证，不作为当前投稿主张或结果依据。
+
 ### 当前目录
 
 - `docs/`: 中文为主的研究设计、期刊定位、文献矩阵、实验方案和证据门控。
@@ -46,6 +48,8 @@ This workspace prepares an AI-related manuscript with potential for submission t
 **Calibrated detection of AI-generated text under cross-domain and paraphrase-style distribution shifts**
 
 The project is evidence-gated: missing experiments are explicitly tracked as evidence gaps rather than written as completed findings. The current version has moved from small-sample smoke tests to locked empirical experiments: SemEval-2024 Task 8 Subtask A uses the official full monolingual/multilingual train-dev files, and MAGE uses the locally available full train/test/OOD files.
+
+The current submission evidence starts from `docs/current_status_index.md` and `docs/empirical_experiment_summary.md`. Early-stage validation reports are historical development logs and are not the basis for the current manuscript claims.
 
 ### Project Structure
 

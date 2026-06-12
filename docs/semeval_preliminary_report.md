@@ -1,5 +1,7 @@
 # SemEval-2024 Subtask A Monolingual Preliminary Report
 
+Status: historical development log. The current manuscript uses full locked SemEval-A monolingual and multilingual train-dev experiments.
+
 ## Purpose
 
 This report records the first official SemEval-2024 Task 8 Subtask A monolingual run in this workspace. It closes the previous gap where SemEval/M4 existed only as a plan.

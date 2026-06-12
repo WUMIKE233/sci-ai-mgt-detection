@@ -1,5 +1,7 @@
 # Bootstrap Confidence Intervals
 
+Status: historical development log. The current manuscript uses the locked empirical statistics listed in `docs/empirical_experiment_summary.md` and `outputs/locked/statistical_analysis/`.
+
 This report gives 95% bootstrap confidence intervals for current preliminary predictions. These intervals quantify uncertainty within the sampled test sets; they do not fix the larger limitation that the datasets are still small sampled subsets.
 
 Bootstrap resamples per run: `1000`

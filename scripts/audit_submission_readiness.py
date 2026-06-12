@@ -497,7 +497,7 @@ def write_markdown(path: Path, checks: list[dict], placeholders: list[dict]) -> 
         "",
         f"Overall status: **{overall}**",
         "",
-        "This audit is conservative. Locked empirical experiments count as progress, but unresolved placeholders, incomplete benchmark processing, missing author metadata, and missing journal verification block submission.",
+        "This audit is conservative. Locked empirical experiments count as progress, unresolved manuscript/package items block submission, and journal-partition evidence is reported as a warning when only third-party evidence is available.",
         "",
         "## Gate Summary",
         "",

@@ -1,5 +1,7 @@
 # Preliminary Experiment Summary
 
+Status: historical development log. The current manuscript uses locked SemEval-A and MAGE outputs summarized in `docs/empirical_experiment_summary.md`.
+
 This table summarizes real-data preliminary experiments. These results are not yet submission-grade because they use small samples, single seeds, and incomplete benchmark coverage.
 
 CSV source: `outputs\experiment_summary\preliminary_metrics.csv`

@@ -1,5 +1,7 @@
 # Calibrated Selective Prediction Preliminary Report
 
+Status: historical development log. This report records early pipeline validation and is not the evidence base for the current submission-scope manuscript.
+
 Date: 2026-06-12
 
 ## Purpose

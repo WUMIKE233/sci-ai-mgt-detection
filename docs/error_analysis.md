@@ -1,5 +1,7 @@
 # Error Analysis
 
+Status: historical development log. The current manuscript uses the locked subgroup analysis in `outputs/locked/statistical_analysis/empirical_subgroup_errors.csv`.
+
 This report summarizes subgroup failures and high-confidence errors for the current Transformer baselines. It is preliminary because the data are small sampled subsets.
 
 Subgroup CSV: `outputs\error_analysis\subgroup_error_summary.csv`

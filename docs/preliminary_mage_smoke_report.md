@@ -1,5 +1,7 @@
 # Preliminary MAGE Pipeline Smoke Report
 
+Status: historical development log. This file records an early smoke test and is not the evidence base for the current submission-scope manuscript.
+
 Date: 2026-06-12
 
 ## Purpose
