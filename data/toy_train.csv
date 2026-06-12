@@ -1,0 +1,9 @@
+text,label,domain,generator,perturbation
+"The committee met on Tuesday and approved the revised budget after public comment.",human,news,human,none
+"Students reported that the new library hours made it easier to complete group projects.",human,education,human,none
+"The river level increased after three days of rain, according to the local monitoring station.",human,news,human,none
+"This essay argues that careful reading improves memory because it encourages active recall.",human,education,human,none
+"In conclusion, the implementation of advanced strategies can significantly enhance operational outcomes across multiple sectors.",machine,news,gpt_like,none
+"The proposed framework provides a comprehensive solution by leveraging innovative mechanisms to optimize user engagement.",machine,education,gpt_like,none
+"Overall, this approach highlights the importance of sustainable development and demonstrates meaningful implications for stakeholders.",machine,news,gpt_like,none
+"By integrating multiple perspectives, the system can generate robust insights and improve decision-making effectiveness.",machine,education,gpt_like,none

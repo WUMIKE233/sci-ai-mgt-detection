@@ -1,0 +1,151 @@
+[
+  {
+    "repo_id": "yaful/MAGE",
+    "sha": "342663f0a2b775455c023f5d36a1341ff0ec5402",
+    "card_data": {
+      "license": "apache-2.0"
+    },
+    "files": [
+      {
+        "path": ".gitattributes",
+        "size": 2444,
+        "lfs": null
+      },
+      {
+        "path": "DeepfakeTextDetect.py",
+        "size": 1916,
+        "lfs": null
+      },
+      {
+        "path": "README.md",
+        "size": 1928,
+        "lfs": null
+      },
+      {
+        "path": "prepare_testbeds.py",
+        "size": 11480,
+        "lfs": null
+      },
+      {
+        "path": "test.csv",
+        "size": 71739623,
+        "lfs": {
+          "size": 71739623,
+          "sha256": "dcb8a8a8de1459d382ac2da5e0f1c39452e8bc47d186d7393f3ed4308f762ac7",
+          "pointer_size": 133
+        }
+      },
+      {
+        "path": "test_ood_set_gpt.csv",
+        "size": 2191864,
+        "lfs": null
+      },
+      {
+        "path": "test_ood_set_gpt_para.csv",
+        "size": 3614100,
+        "lfs": null
+      },
+      {
+        "path": "train.csv",
+        "size": 403744528,
+        "lfs": {
+          "size": 403744528,
+          "sha256": "07b95008964d6be412aa764aa1e515d652c345305cebc522a7612c6015ba373a",
+          "pointer_size": 134
+        }
+      },
+      {
+        "path": "valid.csv",
+        "size": 72276577,
+        "lfs": {
+          "size": 72276577,
+          "sha256": "005e200957a4da551c8ac37079f43811db9c32f5141e3bdabb1caa257588691f",
+          "pointer_size": 133
+        }
+      }
+    ]
+  },
+  {
+    "repo_id": "liamdugan/raid",
+    "sha": "865cac74188466cb0c3b7574a10204007b57a459",
+    "card_data": {
+      "language": [
+        "en",
+        "cs",
+        "de"
+      ],
+      "license": "mit",
+      "size_categories": [
+        "10M<n<100M"
+      ],
+      "task_categories": [
+        "text-classification"
+      ],
+      "pretty_name": "RAID",
+      "configs": [
+        {
+          "config_name": "raid",
+          "default": true,
+          "data_files": [
+            {
+              "split": "train",
+              "path": "train.csv"
+            },
+            {
+              "split": "extra",
+              "path": "extra.csv"
+            }
+          ]
+        },
+        {
+          "config_name": "raid_test",
+          "data_files": [
+            {
+              "split": "test",
+              "path": "test.csv"
+            }
+          ]
+        }
+      ]
+    },
+    "files": [
+      {
+        "path": ".gitattributes",
+        "size": 2461,
+        "lfs": null
+      },
+      {
+        "path": "README.md",
+        "size": 3664,
+        "lfs": null
+      },
+      {
+        "path": "extra.csv",
+        "size": 3707337095,
+        "lfs": {
+          "size": 3707337095,
+          "sha256": "fed9b80bd6a5712bd49bd035cf92500ac1c562a2da3bbf9a4518b1308b5fbc1f",
+          "pointer_size": 135
+        }
+      },
+      {
+        "path": "test.csv",
+        "size": 1221088550,
+        "lfs": {
+          "size": 1221088550,
+          "sha256": "96867bb0cebf4c49f412f78c35bdeb638494547165ca397b056f2734bb702c90",
+          "pointer_size": 135
+        }
+      },
+      {
+        "path": "train.csv",
+        "size": 11779491051,
+        "lfs": {
+          "size": 11779491051,
+          "sha256": "52f04ceebc126064e68fbd22d8b736964065745464f4bfd52e488150b49f84e4",
+          "pointer_size": 136
+        }
+      }
+    ]
+  }
+]

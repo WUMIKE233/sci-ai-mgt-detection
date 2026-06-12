@@ -1,0 +1,14 @@
+{
+  "train": "data/processed/raid/raid_train_small.csv",
+  "test": "data/processed/raid/raid_test_small.csv",
+  "text_col": "text",
+  "label_col": "label",
+  "group_cols": ["domain", "generator", "perturbation", "source_split"],
+  "calibration_size": 0.25,
+  "seed": 42,
+  "max_features": 40000,
+  "ngram_min": 1,
+  "ngram_max": 2,
+  "dataset_label": "RAID labeled offset sample",
+  "output_dir": "outputs/raid_small_calibrated_selective"
+}

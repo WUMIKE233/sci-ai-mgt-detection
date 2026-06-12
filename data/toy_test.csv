@@ -1,0 +1,5 @@
+text,label,domain,generator,perturbation
+"The school board delayed the vote until parents could review the transportation proposal.",human,education,human,none
+"A small power outage affected three buildings before technicians restored service.",human,news,human,none
+"This comprehensive analysis underscores the transformative potential of data-driven solutions in modern environments.",machine,news,gpt_like,none
+"The methodology enables scalable improvements by combining adaptive features with optimized performance.",machine,education,gpt_like,none

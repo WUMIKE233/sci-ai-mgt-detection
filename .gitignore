@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Large datasets and model artifacts
+data/raw/
+data/processed/
+data/cache/
+models/
+checkpoints/
+
+# Reproducible outputs can be regenerated unless explicitly archived
+outputs/
+
+# Local submission/private materials not needed for the public code repository
+operation_log.md
+logs/
+submission_package/
+manuscript/
+docs/author_metadata_template.md
+docs/submission_package_checklist.md
+docs/submission_docx_qa.md
+docs/submission_readiness_report.md
+docs/public_code_availability_record.md
+docs/journal_verification_*.md
+
+# Local editor and OS files
+.DS_Store
+Thumbs.db
