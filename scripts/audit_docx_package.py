@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import re
+import zipfile
 from collections import Counter
 from pathlib import Path
 
@@ -43,6 +44,15 @@ def docx_text(path: Path) -> str:
             cells = [cell.text.strip().replace("\n", " ") for cell in row.cells]
             if any(cells):
                 parts.append(" | ".join(cells))
+    return "\n".join(parts)
+
+
+def docx_internal_text(path: Path) -> str:
+    parts: list[str] = []
+    with zipfile.ZipFile(path) as archive:
+        for name in archive.namelist():
+            if name.endswith((".xml", ".rels")):
+                parts.append(archive.read(name).decode("utf-8", errors="ignore"))
     return "\n".join(parts)
 
 
@@ -96,6 +106,7 @@ def main() -> None:
             texts[label] = ""
 
     manuscript = texts["anonymous_manuscript"]
+    manuscript_internal = docx_internal_text(FILES["anonymous_manuscript"]) if FILES["anonymous_manuscript"].exists() else ""
     title_page = texts["title_page"]
     cover_letter = texts["cover_letter"]
     declarations = texts["declarations"]
@@ -104,6 +115,7 @@ def main() -> None:
     author_leak_patterns = collect_author_identifiers(title_page)
     leaks = []
     lower_manuscript = manuscript.lower()
+    lower_internal = manuscript_internal.lower()
     for identifier in author_leak_patterns:
         normalized = identifier.replace(" ", "")
         if identifier.lower() in lower_manuscript or normalized.lower() in lower_manuscript.replace(" ", ""):
@@ -114,6 +126,19 @@ def main() -> None:
             status(not leaks),
             f"author_identifier_hits={leaks}",
             "Remove author, affiliation, email, phone, and ORCID from the anonymous manuscript file.",
+        )
+    )
+    internal_leaks = []
+    for identifier in author_leak_patterns:
+        normalized = identifier.replace(" ", "")
+        if identifier.lower() in lower_internal or normalized.lower() in lower_internal.replace(" ", ""):
+            internal_leaks.append(identifier)
+    checks.append(
+        check(
+            "anonymous manuscript internal DOCX XML has no author identifiers",
+            status(not internal_leaks),
+            f"internal_author_identifier_hits={internal_leaks}",
+            "Scrub DOCX metadata and internal XML before uploading the anonymous manuscript.",
         )
     )
 

@@ -79,6 +79,14 @@ def set_table_width(table, width_dxa: int = 9360) -> None:
 
 
 def configure_document(doc: Document) -> None:
+    props = doc.core_properties
+    props.author = ""
+    props.last_modified_by = ""
+    props.title = ""
+    props.subject = ""
+    props.keywords = ""
+    props.comments = ""
+
     section = doc.sections[0]
     section.top_margin = Inches(1)
     section.bottom_margin = Inches(1)
