@@ -422,11 +422,11 @@ def build_checks(placeholder_rows: list[dict], placeholder_counts: Counter) -> l
     neural_seed_report = Path("docs/neural_seed_sweep_report.md")
     checks.append(
         check(
-            "Repeated-seed neural baselines complete",
+            "Neural baseline development log is scoped as historical",
             "statistics",
             status_from_bool(exists_nonempty(neural_seed_report), blocker=False),
             f"{neural_seed_report} exists={neural_seed_report.exists()}",
-            "Keep the manuscript scoped to the implemented TF-IDF Logistic Regression detector unless stronger repeated-seed encoder baselines are added.",
+            "Keep the submitted manuscript scoped to the locked TF-IDF Logistic Regression reliability study unless stronger full-scope neural baselines are added later.",
         )
     )
 

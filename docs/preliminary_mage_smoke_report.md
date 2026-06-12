@@ -1,4 +1,4 @@
-# Preliminary MAGE Pipeline Smoke Report
+# Historical MAGE Pipeline Smoke Report
 
 Status: historical development log. This file records an early smoke test and is not the evidence base for the current submission-scope manuscript.
 
@@ -6,7 +6,7 @@ Date: 2026-06-12
 
 ## Purpose
 
-This report records a small real-data pipeline validation run. It is **not** a final manuscript result and must not be copied into the Results section as evidence of the proposed method.
+This report records a small real-data pipeline validation run. It is a historical smoke test and must not be copied into the Results section as evidence of the submitted manuscript.
 
 ## Data
 
@@ -58,7 +58,7 @@ python scripts\train_baselines.py --config configs\baseline.mage_small.json
 
 The small test set suggests a useful stress-test pattern: ordinary GPT-4 paraphrased/generated examples were often detected as machine, while machine-paraphrased human-source examples were frequently misclassified. In this small sample, the `machine_paraphrase` group had much lower accuracy than the `gpt4` group for both baselines.
 
-This pattern supports the paper's motivation that MGT detection should evaluate robustness and uncertainty under paraphrase-like distribution shift. However, it is still only a smoke-test observation. The final paper needs full-scale evaluation, confidence intervals, and comparison against stronger transformer baselines.
+This pattern supported the paper's motivation that MGT detection should evaluate robustness and uncertainty under paraphrase-like distribution shift. It is now superseded by the locked full SemEval-A and MAGE evidence package.
 
 ## Limitations
 
@@ -69,15 +69,15 @@ This pattern supports the paper's motivation that MGT detection should evaluate 
 - No calibration method beyond the SVM probability wrapper was evaluated.
 - No full RAID or SemEval/M4 experiments were run.
 
-## Next Required Work
+## Historical Follow-up Plan
 
-1. Download or stream the full MAGE train/valid/test files.
-2. Add SemEval/M4 conversion.
-3. Add RAID streaming/subsampling conversion because full files are very large.
-4. Train at least one pre-trained transformer baseline.
-5. Add post-hoc calibration and selective prediction as explicit methods.
-6. Generate reliability diagrams and coverage-risk plots.
+1. Full MAGE train/valid/test files were later downloaded and used for the locked submission-scope evidence.
+2. SemEval-A conversion was added and used for the locked submission-scope evidence.
+3. RAID was scoped to related-work and repository context rather than main empirical evidence.
+4. Transformer baseline runs were retained as historical development checks.
+5. Post-hoc calibration and selective prediction were added as explicit methods.
+6. Reliability diagrams and coverage-risk plots were generated for the current empirical assets.
 
 ## Follow-up Completed
 
-The first post-hoc calibration and selective prediction pipeline has now been implemented and run. See `docs/calibrated_selective_preliminary_report.md`.
+The first post-hoc calibration and selective prediction pipeline was implemented after this smoke test. Current submission evidence is summarized in `docs/empirical_experiment_summary.md`.

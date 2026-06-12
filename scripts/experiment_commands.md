@@ -194,7 +194,7 @@ Expected local outputs:
 - `outputs/semeval_seed_sweep/seed_sweep_summary.csv`
 - `docs/semeval_seed_sweep_report.md`
 
-This is preliminary stability evidence for low-cost SemEval TF-IDF and calibration runs. It complements, but does not replace, the neural repeated-seed sweep.
+This is a historical stability check for low-cost SemEval TF-IDF and calibration runs. The submitted manuscript relies on the locked full SemEval-A and MAGE evidence package, not on this development run alone.
 
 ## 15. Run SemEval neural repeated-seed stability sweep
 
@@ -208,7 +208,7 @@ Expected local outputs:
 - `outputs/neural_seed_sweep/neural_seed_sweep_summary.csv`
 - `docs/neural_seed_sweep_report.md`
 
-This is preliminary stability evidence for frozen and fine-tuned DistilBERT on the SemEval Subtask A monolingual small-sample setup.
+This is a historical stability check for frozen and fine-tuned DistilBERT on the SemEval Subtask A monolingual small-sample setup. It is not the primary evidence for the submitted manuscript.
 
 ## 16. Bootstrap confidence intervals and error analysis
 

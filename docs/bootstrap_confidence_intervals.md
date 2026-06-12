@@ -2,7 +2,7 @@
 
 Status: historical development log. The current manuscript uses the locked empirical statistics listed in `docs/empirical_experiment_summary.md` and `outputs/locked/statistical_analysis/`.
 
-This report gives 95% bootstrap confidence intervals for current preliminary predictions. These intervals quantify uncertainty within the sampled test sets; they do not fix the larger limitation that the datasets are still small sampled subsets.
+This report gives 95% bootstrap confidence intervals for early sampled prediction files. It is retained as pipeline history only; the submitted manuscript uses the locked statistics in `outputs/locked/statistical_analysis/`.
 
 Bootstrap resamples per run: `1000`
 CSV source: `outputs\statistical_analysis\bootstrap_confidence_intervals.csv`
@@ -31,8 +31,8 @@ CSV source: `outputs\statistical_analysis\bootstrap_confidence_intervals.csv`
 | SemEval Subtask A mono small | Frozen Transformer probe | distilbert_frozen_probe | 5000 | 0.5796 [0.5660, 0.5926] | 0.5383 [0.5250, 0.5517] | 0.6416 [0.6254, 0.6560] | 0.3238 [0.3142, 0.3345] | 0.2759 [0.2632, 0.2898] |
 | SemEval Subtask A mono small | Fine-tuned Transformer | distilbert_finetuned | 5000 | 0.6380 [0.6246, 0.6514] | 0.6184 [0.6040, 0.6327] | 0.7022 [0.6881, 0.7160] | 0.2870 [0.2767, 0.2973] | 0.2280 [0.2163, 0.2429] |
 
-## Interpretation Boundary
+## Historical Interpretation Boundary
 
-- These intervals are conditional on the current sampled test sets.
-- They do not replace repeated seeds, larger stratified samples, or full benchmark processing.
-- Final manuscript tables should regenerate this file from locked predictions.
+- These intervals are conditional on early sampled test sets.
+- They do not define the current submission-scope claims.
+- Current manuscript tables are generated from locked prediction files and the empirical assets listed in `docs/empirical_experiment_summary.md`.

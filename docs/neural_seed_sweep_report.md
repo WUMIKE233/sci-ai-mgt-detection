@@ -2,7 +2,7 @@
 
 Status: historical development log. The current submission-scope manuscript is bounded to TF-IDF Logistic Regression reliability analysis unless stronger full-scope neural baselines are added later.
 
-This report repeats DistilBERT neural baselines on the SemEval-2024 Task 8 Subtask A monolingual small-sample setup. It provides preliminary repeated-seed stability evidence and is not a final full-benchmark result.
+This report repeats DistilBERT neural baselines on the SemEval-2024 Task 8 Subtask A monolingual small-sample setup. It is a historical repeated-seed stability check and is not used as current submission-scope evidence.
 
 ## Configuration
 
@@ -32,8 +32,8 @@ This report repeats DistilBERT neural baselines on the SemEval-2024 Task 8 Subta
 | Fine-tuned Transformer | distilbert_finetuned | 3 | 0.6615 | 0.0275 | 0.6542 | 0.0355 | 0.7284 | 0.0383 | 0.2254 | 0.0028 |
 | Frozen Transformer probe | distilbert_frozen_probe | 3 | 0.5749 | 0.0064 | 0.5331 | 0.0090 | 0.6508 | 0.0109 | 0.2751 | 0.0012 |
 
-## Interpretation Boundary
+## Historical Interpretation Boundary
 
 - The seed changes the sampled training subset, validation split, and model initialization.
 - The current dev sample is shared across seeds when the configured cap covers the available monolingual dev groups.
-- These results support pipeline stability checks only. Submission-grade claims still require locked full processing, journal-specific reporting, and final confidence intervals.
+- These results support pipeline stability checks only. The submitted manuscript instead relies on locked full SemEval-A and MAGE processing, journal-specific reporting, and bootstrap confidence intervals.

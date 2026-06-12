@@ -1,4 +1,4 @@
-# Fine-Tuned Transformer Preliminary Report
+# Historical Fine-Tuned Transformer Report
 
 Status: historical development log. This report records early small-sample neural experiments; the current submitted claims are bounded to the locked TF-IDF Logistic Regression reliability study.
 
@@ -59,7 +59,7 @@ Training history:
 | 1 | 0.4749 | 0.2110 | 0.9025 |
 | 2 | 0.2318 | 0.0867 | 0.9535 |
 
-Preliminary RAID notes:
+Historical RAID notes:
 
 - Fine-tuned DistilBERT reaches similar accuracy to the frozen probe but improves AUROC and ECE in this sampled split.
 - The `code` domain remains the lowest-performing domain.
@@ -92,7 +92,7 @@ Training history:
 | 1 | 0.4872 | 0.2351 | 0.9108 |
 | 2 | 0.1224 | 0.2110 | 0.9427 |
 
-Preliminary MAGE notes:
+Historical MAGE notes:
 
 - Fine-tuning improves MAGE small-subset accuracy over the frozen DistilBERT probe.
 - `machine_paraphrase` remains a major failure mode, with group accuracy 0.5656.
@@ -101,10 +101,10 @@ Preliminary MAGE notes:
 
 ## Interpretation Boundary
 
-These results strengthen the manuscript because a real fine-tuned encoder baseline is now available. They still remain preliminary because:
+These results strengthened the development record by showing that a fine-tuned encoder baseline could run locally. They are bounded to early development checks because:
 
 - The datasets are small sampled subsets.
 - Only one random seed has been run.
 - No confidence intervals have been computed.
-- Full MAGE/RAID processing and SemEval/M4 conversion remain required.
-- The DistilBERT baseline is adequate for a first baseline, but a stronger encoder such as RoBERTa/DeBERTa may be needed for final SCI submission depending on compute budget.
+- They are not used as current submission-scope evidence.
+- Stronger full-scope neural baselines can be added in a future revision if requested by reviewers.

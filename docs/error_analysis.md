@@ -2,7 +2,7 @@
 
 Status: historical development log. The current manuscript uses the locked subgroup analysis in `outputs/locked/statistical_analysis/empirical_subgroup_errors.csv`.
 
-This report summarizes subgroup failures and high-confidence errors for the current Transformer baselines. It is preliminary because the data are small sampled subsets.
+This report summarizes subgroup failures and high-confidence errors for early Transformer baselines on sampled subsets. It is retained as pipeline history only; the submitted manuscript uses the locked subgroup analysis in `outputs/locked/statistical_analysis/empirical_subgroup_errors.csv`.
 
 Subgroup CSV: `outputs\error_analysis\subgroup_error_summary.csv`
 High-confidence error CSV: `outputs\error_analysis\high_confidence_errors.csv`
@@ -39,8 +39,8 @@ High-confidence error CSV: `outputs\error_analysis\high_confidence_errors.csv`
 - SemEval Subtask A monolingual dev shows persistent unseen-generator difficulty for both frozen and fine-tuned DistilBERT baselines.
 - High-confidence errors should be reviewed before writing final claims about reliability.
 
-## Required Before Submission
+## Historical Limitations
 
-- Repeat error analysis on larger samples and final model predictions.
-- Include representative examples only when dataset license and journal policy permit text excerpts.
-- Avoid treating detector outputs as proof of authorship.
+- These rows do not define the current submission-scope claims.
+- The submitted manuscript uses locked full SemEval-A and MAGE subgroup analysis.
+- The manuscript avoids treating detector outputs as proof of authorship and does not include restricted text excerpts.

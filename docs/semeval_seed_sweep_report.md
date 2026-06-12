@@ -2,7 +2,7 @@
 
 Status: historical development log. The current manuscript uses locked full SemEval-A and MAGE empirical outputs.
 
-This report repeats the low-cost SemEval-2024 Task 8 Subtask A monolingual small-sample pipeline across sampling seeds. It is preliminary stability evidence, not final benchmark evidence.
+This report repeats the low-cost SemEval-2024 Task 8 Subtask A monolingual small-sample pipeline across sampling seeds. It is a historical development check, not the final benchmark evidence used for the submitted manuscript.
 
 Seeds: `13, 42, 2026`
 
@@ -36,8 +36,8 @@ Seeds: `13, 42, 2026`
 | TF-IDF baselines | linear_svm | 0.6437 | 0.0022 | 0.6416 | 0.0020 | 0.7053 | 0.0003 | 0.1626 | 0.0032 |
 | TF-IDF baselines | logreg | 0.6126 | 0.0013 | 0.5970 | 0.0027 | 0.6846 | 0.0019 | 0.1131 | 0.0027 |
 
-## Interpretation Boundary
+## Historical Interpretation Boundary
 
 - The seed changes the sampled training subset and the calibration split.
 - The dev set remains the same because the current `max-dev-per-group=500` covers the sampled monolingual dev groups.
-- Final submission still requires locked full processing, more seeds for neural baselines, and journal-ready statistical analysis.
+- The current submitted manuscript no longer relies on this development run. It relies on locked full SemEval-A and MAGE outputs, bootstrap intervals, subgroup analysis, and the manuscript assets summarized in `docs/empirical_experiment_summary.md`.

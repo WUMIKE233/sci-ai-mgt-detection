@@ -1,4 +1,4 @@
-# Frozen Transformer Probe Preliminary Report
+# Historical Frozen Transformer Probe Report
 
 Status: historical development log. This report records early small-sample neural experiments; the current submitted claims are bounded to the locked TF-IDF Logistic Regression reliability study.
 
@@ -50,7 +50,7 @@ Output directory:
 |---|---:|---:|---:|---:|---:|---:|
 | DistilBERT frozen mean-pooling probe | 0.9417 | 0.9269 | 0.9774 | 0.9934 | 0.0519 | 0.0622 |
 
-Preliminary notes:
+Historical notes:
 
 - The frozen Transformer probe outperformed the TF-IDF Logistic Regression and TF-IDF calibrated Linear SVM baselines on this RAID sample.
 - The `code` domain remained harder than books/news/Czech in the sampled split.
@@ -66,7 +66,7 @@ Output directory:
 |---|---:|---:|---:|---:|---:|---:|
 | DistilBERT frozen mean-pooling probe | 0.7990 | 0.7941 | 0.9317 | 0.9681 | 0.1518 | 0.1909 |
 
-Preliminary notes:
+Historical notes:
 
 - The frozen Transformer probe improved over the TF-IDF baselines on the MAGE stress subset.
 - `machine_paraphrase` remained the main failure mode, with group accuracy 0.4781.
@@ -74,11 +74,11 @@ Preliminary notes:
 
 ## Interpretation Boundary
 
-These results are still preliminary because:
+These results are bounded to early development checks because:
 
 - The encoder is frozen and not fine-tuned.
 - The data are small sampled subsets.
 - No bootstrap confidence intervals have been computed.
-- Full submission-grade experiments still need larger MAGE/RAID samples, SemEval/M4 conversion, and at least one fine-tuned encoder baseline.
+- They are not used as current submission-scope evidence.
 
-The results are nevertheless useful because they confirm that Transformer-based baselines can run on this machine and that the same evaluation protocol applies to both MAGE and RAID.
+The results are nevertheless useful because they confirm that Transformer-based baselines can run on this machine and that the same evaluation protocol can be applied to MAGE and RAID in future work.

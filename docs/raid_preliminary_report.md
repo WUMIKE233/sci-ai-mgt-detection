@@ -1,4 +1,4 @@
-# RAID Labeled Subset Preliminary Report
+# Historical RAID Labeled Subset Report
 
 Status: historical development log. RAID is cited only for related-work and data-source context in the current submission-scope manuscript, not for main empirical claims.
 
@@ -8,7 +8,7 @@ Date: 2026-06-12
 
 This report records the first RAID labeled-subset pipeline validation. It adds an adversarial/robustness-oriented dataset to the project without downloading RAID's multi-GB CSV files.
 
-This is a real-data pre-experiment, not a final submission-grade result.
+This is a real-data development check, not a current submission-scope empirical result.
 
 ## Dataset Boundary
 
@@ -89,7 +89,7 @@ Generated outputs:
 - `outputs/raid_small_calibrated_selective/reliability_diagram.png`
 - `outputs/raid_small_calibrated_selective/coverage_risk.png`
 
-## Preliminary Failure Patterns
+## Historical Failure Patterns
 
 - The small sample is easier overall than the MAGE paraphrase stress subset.
 - `synonym` and `perplexity_misspelling` perturbations are harder than `insert_paragraphs` in this sample.
@@ -98,9 +98,9 @@ Generated outputs:
 
 ## Interpretation Boundary
 
-These observations support the manuscript's planned focus on robustness, attack-specific analysis, and calibration. They must remain preliminary because:
+These observations helped shape the manuscript's reliability framing, but the current submitted claims do not rely on RAID metrics. The scope is bounded because:
 
 - The subset is offset-sampled rather than statistically complete.
 - The public RAID test split is unlabeled.
-- Full benchmark results require larger stratified processing over RAID train/extra or official evaluation labels.
-- Only TF-IDF baselines were run; transformer baselines remain required.
+- Full RAID benchmark claims would require larger stratified processing over RAID train/extra or official evaluation labels.
+- The submitted manuscript therefore treats RAID as related-work and repository context only.

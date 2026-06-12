@@ -1,8 +1,8 @@
-# Preliminary Experiment Summary
+# Historical Small-Sample Experiment Summary
 
 Status: historical development log. The current manuscript uses locked SemEval-A and MAGE outputs summarized in `docs/empirical_experiment_summary.md`.
 
-This table summarizes real-data preliminary experiments. These results are not yet submission-grade because they use small samples, single seeds, and incomplete benchmark coverage.
+This table summarizes early real-data development experiments. These results are retained as pipeline history only; the submitted manuscript uses the locked full SemEval-A and MAGE evidence package summarized in `docs/empirical_experiment_summary.md`.
 
 CSV source: `outputs\experiment_summary\preliminary_metrics.csv`
 
@@ -30,15 +30,13 @@ CSV source: `outputs\experiment_summary\preliminary_metrics.csv`
 | SemEval Subtask A mono small | Frozen Transformer probe | distilbert_frozen_probe | 0.5796 | 0.5383 | 0.6416 | 0.3238 | 0.2759 |
 | SemEval Subtask A mono small | Fine-tuned Transformer | distilbert_finetuned | 0.6380 | 0.6184 | 0.7022 | 0.2870 | 0.2280 |
 
-## Current Strongest Preliminary Rows
+## Historical Strongest Rows
 
-- MAGE small: fine-tuned DistilBERT has the highest accuracy among current runs, but paraphrase failures remain.
-- RAID small: frozen and fine-tuned DistilBERT are both strong; calibrated Linear SVM remains a competitive lightweight baseline.
-- SemEval Subtask A monolingual dev: current TF-IDF and DistilBERT baselines show clear cross-generator difficulty because the dev generator is unseen in the sampled train set.
+- MAGE small: fine-tuned DistilBERT had the highest accuracy among these early runs, but paraphrase failures remained visible.
+- RAID small: frozen and fine-tuned DistilBERT were both strong; calibrated Linear SVM remained a competitive lightweight baseline.
+- SemEval Subtask A monolingual dev: TF-IDF and DistilBERT baselines showed clear cross-generator difficulty because the dev generator was unseen in the sampled train set.
 
-## Required Before Submission
+## Historical Limitations
 
-- Larger stratified samples or full benchmark processing.
-- Repeated random seeds and confidence intervals.
-- Full SemEval/M4 processing, including official test/gold handling where permitted.
-- Final table generation from locked scripts only.
+- These early rows used small samples and did not define the current submitted claims.
+- The current manuscript supersedes this file with full SemEval-A and MAGE processing, bootstrap intervals, subgroup analysis, and locked manuscript assets.
