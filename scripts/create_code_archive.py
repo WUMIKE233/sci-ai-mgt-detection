@@ -88,12 +88,13 @@ def write_readme(path: Path, archive_name: str, manifest_name: str) -> None:
         "## Exclusions",
         "",
         "- Raw datasets under `data/raw/` are excluded.",
+        "- Processed benchmark extracts under `data/processed/` are excluded except for small metadata files.",
         "- Generated outputs under `outputs/` are excluded except for this archive folder.",
-        "- Model checkpoints, cache folders, and Python bytecode are excluded.",
+        "- Model checkpoints, cache folders, local Word submission files, private operation logs, and Python bytecode are excluded from the public repository.",
         "",
         "## Submission Boundary",
         "",
-        "This is a local code archive. Final submission still needs either a public repository URL, an archived DOI, or a journal-compliant code-availability exception.",
+        "Public code repository: https://github.com/WUMIKE233/sci-ai-mgt-detection",
         "",
     ]
     path.write_text("\n".join(lines), encoding="utf-8")
@@ -126,7 +127,7 @@ def main() -> None:
         "archive_sha256": sha256(archive_path),
         "file_count": len(manifest_files),
         "files": manifest_files,
-        "excluded": ["data/raw/", "outputs/", "models/", "checkpoints/", "__pycache__/"],
+        "excluded": ["data/raw/", "data/processed/", "outputs/", "models/", "checkpoints/", "__pycache__/", "submission_package/"],
     }
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     write_readme(readme_path, archive_path.name, manifest_path.name)
