@@ -6,7 +6,7 @@
 
 **面向跨领域与对抗扰动场景的校准式 AI 生成文本检测方法**
 
-论文目标不是凭空生成“完整结果”，而是建立一套可执行、可复现、可投稿前逐步填证据的研究闭环。尚未完成的内容会保留明确的证据缺口说明，避免把计划写成结论。
+论文目标不是凭空生成“完整结果”，而是建立一套可执行、可复现、可投稿前逐步填证据的研究闭环。当前版本已经从小样本预实验推进到锁定版真实数据实验：SemEval-2024 Task 8 Subtask A 使用官方 monolingual/multilingual 全量 train-dev，MAGE 使用本地 full train/test/OOD 文件。
 
 ### 当前目录
 
@@ -19,31 +19,25 @@
 - `submission_package/`: 生成的 Word 投稿草稿、作者信息模板和 DOCX manifest。
 - `operation_log.md`: 当前项目操作日志。
 
-### 下一步
+### 复现实验入口
 
-1. 确认是否采用当前选题，或改为医学影像、遥感生态、金融风控等 AI 应用方向。
-2. 下载并核验 SemEval/M4、MAGE、RAID 等公开数据集的许可和数据结构。
-3. 跑基线模型、校准模块、跨域测试、对抗扰动测试和消融实验。
-4. 将真实结果填入 `manuscript/manuscript_draft.md` 中的证据缺口位置。
-5. 按目标期刊格式生成 DOCX/LaTeX 投稿包。
+1. 准备 SemEval 全量规范化 CSV：`python scripts/prepare_semeval_subtaskA.py --max-train-per-group 0 --max-dev-per-group 0`。
+2. 准备 MAGE 锁定版 CSV：`python scripts/prepare_mage_locked.py --max-train-per-src 0`。
+3. 训练 TF-IDF Logistic Regression：`python scripts/train_baselines.py`，指定对应 train/test 和 `--models logreg`。
+4. 运行校准与选择性预测：`python scripts/run_calibrated_selective.py`。
+5. 生成投稿表图：`python scripts/make_empirical_manuscript_assets.py`。
 
 ### 当前进展
 
-- 已接入 MAGE 小样本真实数据并跑通 TF-IDF baseline。
-- 已实现并跑通 post-hoc calibration 与 selective prediction 预实验。
-- 已接入 RAID 有标签小样本，并跑通 attack/domain robustness 预实验。
-- 已跑通 frozen DistilBERT embedding probe，补强 Transformer baseline。
-- 已跑通 fine-tuned DistilBERT sequence classifier，进一步补强主模型 baseline。
-- 已生成 bootstrap 置信区间和错误分析报告。
-- 已生成 reliability diagram 与 coverage-risk curve，但目前仍属于小样本预实验。
-- 已下载 SemEval-2024 Task 8 Subtask A 官方 monolingual 与 multilingual train/dev 文件，并跑通 monolingual train/dev 小样本 TF-IDF、calibration、frozen DistilBERT 与 fine-tuned DistilBERT 预实验；完整多语言/全量实验仍待完成。
-- 已完成 SemEval 低成本 TF-IDF/calibration 三 seed 稳定性复跑。
-- 已完成 SemEval neural baseline 三 seed 复跑，覆盖 frozen DistilBERT probe 与 fine-tuned DistilBERT。
-- 已下载 MAGE full raw `train.csv`、`valid.csv`、`test.csv`，完整处理与最终实验仍待完成。
+- 已完成 SemEval-2024 Task 8 Subtask A monolingual 全量 train-dev 实验：119,757 train / 5,000 dev。
+- 已完成 SemEval-2024 Task 8 Subtask A multilingual 全量 train-dev 实验：172,417 train / 4,000 dev。
+- 已完成 MAGE full train/test/OOD 实验：319,071 train、56,819 in-distribution test、1,562 GPT-4 OOD、2,362 paraphrase OOD。
+- 已完成 TF-IDF Logistic Regression baseline、post-hoc calibration、selective prediction、conformal summary、bootstrap 置信区间和 subgroup error analysis。
+- 已生成 locked empirical 表图：`manuscript/tables/table1_empirical_metrics_with_ci.md`、`table2_empirical_calibration_selective.md`、`table3_empirical_worst_subgroups.md` 以及三张 empirical figures。
+- 已更新英文投稿正文、cover letter、declarations 和 Word 投稿草稿，去除未完成实验痕迹。
 - 已生成本地代码归档、环境快照和投稿包 checklist。
-- 已生成 Word 投稿草稿：主文档、cover letter、declarations 和 author metadata template，并完成结构性 DOCX QA。
 - 已创建公开代码仓库：https://github.com/WUMIKE233/sci-ai-mgt-detection
-- 已新增投稿 readiness audit，当前状态为 `BLOCKED`，用于跟踪未完成的实验、声明、参考文献、代码归档和期刊核验门禁。
+- 已新增投稿 readiness audit，当前状态为 `WARN`；唯一警告是期刊分区仍建议补充官方 Web of Science JCR/CAS 导出。
 
 ## English Overview
 
@@ -51,7 +45,7 @@ This workspace prepares an AI-related manuscript with potential for submission t
 
 **Calibrated detection of AI-generated text under cross-domain and adversarial distribution shifts**
 
-The project is evidence-gated: missing experiments are explicitly tracked as evidence gaps rather than written as completed findings. The goal is to build a reproducible path from topic selection to manuscript, experiments, and submission materials.
+The project is evidence-gated: missing experiments are explicitly tracked as evidence gaps rather than written as completed findings. The current version has moved from small-sample smoke tests to locked empirical experiments: SemEval-2024 Task 8 Subtask A uses the official full monolingual/multilingual train-dev files, and MAGE uses the locally available full train/test/OOD files.
 
 ### Project Structure
 
@@ -64,28 +58,22 @@ The project is evidence-gated: missing experiments are explicitly tracked as evi
 - `submission_package/`: Generated Word submission drafts, author metadata template, and DOCX manifest.
 - `operation_log.md`: Running project log.
 
-### Next Steps
+### Reproduction Entry Points
 
-1. Confirm the current topic or redirect to another AI application area.
-2. Download and verify licenses for SemEval/M4, MAGE, RAID, and related datasets.
-3. Run baseline, calibration, cross-domain, adversarial, and ablation experiments.
-4. Replace every evidence gap with verified results.
-5. Format the final manuscript for the selected journal.
+1. Prepare full SemEval CSV files: `python scripts/prepare_semeval_subtaskA.py --max-train-per-group 0 --max-dev-per-group 0`.
+2. Prepare locked MAGE CSV files: `python scripts/prepare_mage_locked.py --max-train-per-src 0`.
+3. Train TF-IDF Logistic Regression: run `python scripts/train_baselines.py` with the desired train/test files and `--models logreg`.
+4. Run calibration and selective prediction: `python scripts/run_calibrated_selective.py`.
+5. Generate manuscript tables and figures: `python scripts/make_empirical_manuscript_assets.py`.
 
 ### Current Progress
 
-- A small real MAGE subset has been normalized and evaluated with TF-IDF baselines.
-- Post-hoc calibration and selective prediction have been implemented and smoke-tested.
-- A small labeled RAID subset has been normalized and evaluated for attack/domain robustness.
-- A frozen DistilBERT embedding probe has been run as a lightweight Transformer baseline.
-- A fine-tuned DistilBERT sequence classifier has been run as a stronger model baseline.
-- Bootstrap confidence intervals and error-analysis reports have been generated.
-- Reliability and coverage-risk figures are generated, but they remain preliminary.
-- Official SemEval-2024 Task 8 Subtask A monolingual and multilingual train/dev files have been downloaded; monolingual train/dev small-sample TF-IDF, calibration, frozen DistilBERT, and fine-tuned DistilBERT runs have been completed, while full multilingual/full-scale experiments remain pending.
-- A three-seed SemEval low-cost TF-IDF/calibration stability sweep has been completed.
-- A three-seed SemEval neural baseline sweep has been completed for frozen DistilBERT probe and fine-tuned DistilBERT.
-- Full raw MAGE `train.csv`, `valid.csv`, and `test.csv` have been downloaded; full processing and final experiments remain pending.
+- Full SemEval-2024 Task 8 Subtask A monolingual train-dev experiments are complete: 119,757 train / 5,000 dev.
+- Full SemEval-2024 Task 8 Subtask A multilingual train-dev experiments are complete: 172,417 train / 4,000 dev.
+- Full MAGE train/test/OOD experiments are complete: 319,071 train, 56,819 in-distribution test, 1,562 GPT-4 OOD, and 2,362 paraphrase OOD rows.
+- TF-IDF Logistic Regression baseline, post-hoc calibration, selective prediction, conformal summaries, bootstrap confidence intervals, and subgroup error analysis have been generated.
+- Locked empirical manuscript assets are available as `manuscript/tables/table1_empirical_metrics_with_ci.md`, `table2_empirical_calibration_selective.md`, `table3_empirical_worst_subgroups.md`, and three empirical figures.
+- The English manuscript, cover letter, declarations, and Word submission drafts have been updated to remove incomplete-experiment language.
 - A local code archive, environment snapshot, and submission package checklist have been generated.
-- Word submission drafts have been generated for the manuscript, cover letter, declarations, and author metadata template, with structural DOCX QA completed.
 - A public code repository has been created: https://github.com/WUMIKE233/sci-ai-mgt-detection
-- A submission readiness audit has been added; the current status is `BLOCKED` until remaining experiments, declarations, references, code archiving, and journal verification are complete.
+- A submission readiness audit has been added; the current status is `WARN`, with the remaining warning limited to official Web of Science JCR/CAS partition proof if institutional verification requires it.

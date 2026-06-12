@@ -221,19 +221,22 @@ def build_manuscript() -> Path:
     configure_document(doc)
     markdown_to_docx(doc, Path("manuscript/manuscript_draft.md").read_text(encoding="utf-8"))
 
-    add_section_break(doc, "Generated Preliminary Tables")
-    table1 = Path("manuscript/tables/table1_preliminary_metrics_with_ci.md")
-    table2 = Path("manuscript/tables/table2_worst_subgroups.md")
-    doc.add_heading("Table 1. Preliminary Metrics With Bootstrap Confidence Intervals", level=2)
+    add_section_break(doc, "Empirical Tables")
+    table1 = Path("manuscript/tables/table1_empirical_metrics_with_ci.md")
+    table2 = Path("manuscript/tables/table2_empirical_calibration_selective.md")
+    table3 = Path("manuscript/tables/table3_empirical_worst_subgroups.md")
+    doc.add_heading("Table 1. Locked Empirical Metrics With Bootstrap Confidence Intervals", level=2)
     markdown_to_docx(doc, table1.read_text(encoding="utf-8") if table1.exists() else "")
-    doc.add_heading("Table 2. Worst Preliminary Subgroups", level=2)
+    doc.add_heading("Table 2. Calibration and Selective Prediction Metrics", level=2)
     markdown_to_docx(doc, table2.read_text(encoding="utf-8") if table2.exists() else "")
+    doc.add_heading("Table 3. Highest-Error Subgroups Under the Locked Protocol", level=2)
+    markdown_to_docx(doc, table3.read_text(encoding="utf-8") if table3.exists() else "")
 
-    add_section_break(doc, "Generated Preliminary Figures")
-    add_picture_if_exists(doc, Path("manuscript/figures/figure1_accuracy_with_ci.png"), "Figure 1. Preliminary model comparison by accuracy.")
-    add_picture_if_exists(doc, Path("manuscript/figures/figure2_ece_with_ci.png"), "Figure 2. Preliminary calibration error comparison.")
-    add_picture_if_exists(doc, Path("manuscript/figures/figure3_worst_subgroups.png"), "Figure 3. Worst preliminary subgroups.")
-    captions = Path("manuscript/figures/figure_captions.md")
+    add_section_break(doc, "Empirical Figures")
+    add_picture_if_exists(doc, Path("manuscript/figures/figure1_empirical_accuracy_with_ci.png"), "Figure 1. Locked empirical TF-IDF Logistic Regression accuracy.")
+    add_picture_if_exists(doc, Path("manuscript/figures/figure2_empirical_ece.png"), "Figure 2. Calibration error under the locked protocol.")
+    add_picture_if_exists(doc, Path("manuscript/figures/figure3_empirical_selective_risk.png"), "Figure 3. Selective prediction risk at fixed coverage.")
+    captions = Path("manuscript/figures/empirical_figure_captions.md")
     if captions.exists():
         doc.add_heading("Figure Captions", level=2)
         markdown_to_docx(doc, captions.read_text(encoding="utf-8"))
@@ -257,8 +260,11 @@ def build_simple_docx(source: Path, output_name: str) -> Path:
 def main() -> None:
     outputs = {
         "manuscript": str(build_manuscript()),
+        "title_page": str(build_simple_docx(Path("manuscript/title_page.md"), "title_page_author_details.docx")),
         "cover_letter": str(build_simple_docx(Path("manuscript/cover_letter_draft.md"), "cover_letter_draft.docx")),
         "declarations": str(build_simple_docx(Path("manuscript/declarations.md"), "declarations_draft.docx")),
+        "highlights": str(build_simple_docx(Path("manuscript/highlights.md"), "highlights.docx")),
+        "orcid_information": str(build_simple_docx(Path("manuscript/orcid_information.md"), "orcid_information.docx")),
         "author_metadata": str(build_simple_docx(Path("docs/author_metadata_template.md"), "author_metadata_template.docx")),
     }
     (OUTPUT_DIR / "submission_docx_manifest.json").write_text(json.dumps(outputs, ensure_ascii=False, indent=2), encoding="utf-8")

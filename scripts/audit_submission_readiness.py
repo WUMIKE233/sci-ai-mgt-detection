@@ -1,6 +1,6 @@
 """Audit whether the SCI manuscript package is submission-ready.
 
-The audit is intentionally conservative: preliminary evidence counts as
+The audit is intentionally conservative: locked empirical evidence counts as
 progress, but unresolved RESULT_REQUIRED markers, missing author declarations,
 or incomplete benchmark processing keep the package blocked from submission.
 """
@@ -180,12 +180,13 @@ def build_checks(placeholder_rows: list[dict], placeholder_counts: Counter) -> l
     )
 
     required_assets = [
-        "manuscript/tables/table1_preliminary_metrics_with_ci.md",
-        "manuscript/tables/table2_worst_subgroups.md",
-        "manuscript/figures/figure1_accuracy_with_ci.png",
-        "manuscript/figures/figure2_ece_with_ci.png",
-        "manuscript/figures/figure3_worst_subgroups.png",
-        "manuscript/figures/figure_captions.md",
+        "manuscript/tables/table1_empirical_metrics_with_ci.md",
+        "manuscript/tables/table2_empirical_calibration_selective.md",
+        "manuscript/tables/table3_empirical_worst_subgroups.md",
+        "manuscript/figures/figure1_empirical_accuracy_with_ci.png",
+        "manuscript/figures/figure2_empirical_ece.png",
+        "manuscript/figures/figure3_empirical_selective_risk.png",
+        "manuscript/figures/empirical_figure_captions.md",
     ]
     missing_assets = [path for path in required_assets if not exists_nonempty(path)]
     checks.append(
@@ -194,30 +195,23 @@ def build_checks(placeholder_rows: list[dict], placeholder_counts: Counter) -> l
             "figures and tables",
             status_from_bool(not missing_assets, blocker=False),
             "missing=" + (", ".join(missing_assets) if missing_assets else "none"),
-            "Regenerate with python scripts/make_manuscript_assets.py after final predictions are locked.",
+            "Regenerate with python scripts/make_empirical_manuscript_assets.py after locked predictions are updated.",
         )
     )
 
     evidence_files = [
-        "docs/preliminary_experiment_summary.md",
-        "docs/bootstrap_confidence_intervals.md",
-        "docs/error_analysis.md",
-        "docs/semeval_preliminary_report.md",
-        "docs/semeval_seed_sweep_report.md",
-        "docs/neural_seed_sweep_report.md",
+        "docs/empirical_experiment_summary.md",
+        "outputs/locked/statistical_analysis/empirical_metrics_with_ci.csv",
+        "outputs/locked/statistical_analysis/empirical_selective_metrics.csv",
+        "outputs/locked/statistical_analysis/empirical_subgroup_errors.csv",
         "docs/environment_snapshot.md",
         "docs/submission_package_checklist.md",
-        "outputs/experiment_summary/preliminary_metrics.csv",
-        "outputs/statistical_analysis/bootstrap_confidence_intervals.csv",
-        "outputs/error_analysis/subgroup_error_summary.csv",
-        "outputs/semeval_seed_sweep/seed_sweep_summary.csv",
-        "outputs/neural_seed_sweep/neural_seed_sweep_summary.csv",
         "outputs/reproducibility/environment_snapshot.json",
     ]
     missing_evidence = [path for path in evidence_files if not exists_nonempty(path)]
     checks.append(
         check(
-            "Current preliminary evidence files present",
+            "Current locked empirical evidence files present",
             "evidence",
             status_from_bool(not missing_evidence, blocker=False),
             "missing=" + (", ".join(missing_evidence) if missing_evidence else "none"),
@@ -235,7 +229,7 @@ def build_checks(placeholder_rows: list[dict], placeholder_counts: Counter) -> l
             "data",
             status_from_bool(all(exists_nonempty(path) for path in semeval_mono), blocker=False),
             "; ".join(f"{path} size={file_size(path)}" for path in semeval_mono),
-            "Use these files for current SemEval monolingual pre-experiments.",
+            "Use these files for locked SemEval monolingual experiments.",
         )
     )
     multilingual_train = Path("data/raw/semeval2024_task8/subtaskA/SubtaskA/subtaskA_train_multilingual.jsonl")
@@ -377,7 +371,7 @@ def write_markdown(path: Path, checks: list[dict], placeholders: list[dict]) -> 
         "",
         f"Overall status: **{overall}**",
         "",
-        "This audit is conservative. Preliminary experiments count as progress, but unresolved placeholders, incomplete benchmark processing, missing author metadata, and missing journal verification block submission.",
+        "This audit is conservative. Locked empirical experiments count as progress, but unresolved placeholders, incomplete benchmark processing, missing author metadata, and missing journal verification block submission.",
         "",
         "## Gate Summary",
         "",

@@ -16,6 +16,7 @@ outputs/
 # Local submission/private materials not needed for the public code repository
 operation_log.md
 logs/
+tmp/
 submission_package/
 manuscript/
 docs/author_metadata_template.md
