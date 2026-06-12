@@ -42,6 +42,7 @@
 - 已下载 MAGE full raw `train.csv`、`valid.csv`、`test.csv`，完整处理与最终实验仍待完成。
 - 已生成本地代码归档、环境快照和投稿包 checklist。
 - 已生成 Word 投稿草稿：主文档、cover letter、declarations 和 author metadata template，并完成结构性 DOCX QA。
+- 已创建公开代码仓库：https://github.com/WUMIKE233/sci-ai-mgt-detection
 - 已新增投稿 readiness audit，当前状态为 `BLOCKED`，用于跟踪未完成的实验、声明、参考文献、代码归档和期刊核验门禁。
 
 ## English Overview
@@ -86,4 +87,5 @@ The project is evidence-gated: missing experiments are explicitly tracked as evi
 - Full raw MAGE `train.csv`, `valid.csv`, and `test.csv` have been downloaded; full processing and final experiments remain pending.
 - A local code archive, environment snapshot, and submission package checklist have been generated.
 - Word submission drafts have been generated for the manuscript, cover letter, declarations, and author metadata template, with structural DOCX QA completed.
+- A public code repository has been created: https://github.com/WUMIKE233/sci-ai-mgt-detection
 - A submission readiness audit has been added; the current status is `BLOCKED` until remaining experiments, declarations, references, code archiving, and journal verification are complete.

@@ -17,6 +17,7 @@ This file is the preferred entry point for the current state of the SCI manuscri
 - `docs/environment_snapshot.md`: local Python/CUDA/package reproducibility snapshot.
 - `docs/submission_package_checklist.md`: manuscript, data, reproducibility, and author-metadata submission checklist.
 - `docs/submission_docx_qa.md`: structural QA record for the generated DOCX submission package.
+- `https://github.com/WUMIKE233/sci-ai-mgt-detection`: public code repository excluding raw data, processed benchmark extracts, generated outputs, and local submission-private materials.
 - `outputs/reproducibility/sci_ai_mgt_detection_code_package.zip`: local code archive excluding raw datasets.
 
 ## Manuscript Assets
@@ -34,4 +35,4 @@ This file is the preferred entry point for the current state of the SCI manuscri
 
 ## Current Completion Boundary
 
-The project now has real-data preliminary experiments, Transformer baselines, bootstrap intervals, error analysis, official SemEval Subtask A monolingual small-sample TF-IDF and DistilBERT runs, a three-seed SemEval stability sweep for low-cost models, a three-seed SemEval neural baseline sweep, generated DOCX submission drafts, a local reproducibility code archive, and a repeatable submission-readiness audit. The latest audit status is still BLOCKED because author declarations, public code availability, author metadata, and final JCR/CAS target-journal verification remain required.
+The project now has real-data preliminary experiments, Transformer baselines, bootstrap intervals, error analysis, official SemEval Subtask A monolingual small-sample TF-IDF and DistilBERT runs, a three-seed SemEval stability sweep for low-cost models, a three-seed SemEval neural baseline sweep, generated DOCX submission drafts, a public GitHub code repository, a local reproducibility code archive, and a repeatable submission-readiness audit. The latest audit status is still BLOCKED because final Web of Science JCR/CAS target-journal verification remains required.
